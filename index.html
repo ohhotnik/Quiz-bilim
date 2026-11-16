@@ -9,11 +9,12 @@ body{font-family:Arial;background:#f2f2f2;padding:15px;color:#222}
 .box{background:#fff;padding:20px;border-radius:10px;max-width:500px;margin:15px auto}
 .top{background:#1a73e8;color:#fff;padding:15px;border-radius:10px;max-width:500px;margin:15px auto;text-align:center}
 input{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
-button{width:100%;padding:12px;background:#1a73e8;color:#fff;border:0;border-radius:8px;margin-top:10px;font-size:16px}
+button{width:100%;padding:12px;background:#1a73e8;color:#fff;border:0;border-radius:8px;margin-top:10px;font-size:16px;cursor:pointer}
 button.gray{background:#e0e0e0;color:#222}
 button.green{background:#2e7d32}
 button.red{background:#d32f2f}
 .q button{background:#fff;color:#222;border:1px solid #ccc}
+.q button:disabled{opacity:0.7}
 .hidden{display:none}
 table{width:100%;border-collapse:collapse;margin-top:10px}
 td,th{border:1px solid #ddd;padding:8px;text-align:left}
@@ -24,6 +25,7 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left}
 </head>
 <body>
 <div id="topBar" class="top hidden"><b>👤 <span id="topName">-</span></b><br>Ұпай: <b><span id="topScore">0</span> / 20</b></div>
+
 <div id="login" class="box">
 <h2>Сайтқа кіру 🔥</h2>
 <p>Пароль керек емес! Тек атыңды жаз!</p>
@@ -33,6 +35,7 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left}
 <div id="msg"></div>
 <p style="font-size:12px;color:#666">⚠️ Бір атпен тек бір адам! Басқа телефоннан да кіре алмайды!</p>
 </div>
+
 <div id="main" class="box hidden">
 <h2>Сәлем, <span id="user"></span>!</h2>
 <div id="warnBox" class="warn hidden"></div>
@@ -43,7 +46,7 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left}
 <button class="green" onclick="sendScore()">📤 Ұпайды жіберу</button>
 <p id="sendMsg" style="color:green"></p>
 </div>
-<div style="margin-top:20px"><h3>📋 Оқушылар мен ұпайлары (барлық телефоннан)</h3><table><tr><th>Аты Фамилия</th><th>Ұпай</th></tr><tbody id="allScores"></tbody></table></div>
+<div style="margin-top:20px"><h3>📋 Оқушылар мен ұпайлары</h3><table><tr><th>Аты Фамилия</th><th>Ұпай</th></tr><tbody id="allScores"></tbody></table></div>
 <div id="adminBox" class="hidden"><button class="red" onclick="clearAll()">Барлығын өшіру (тек админ)</button></div>
 <button class="gray" onclick="shigu()">Шығу</button>
 </div>
@@ -51,7 +54,6 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left}
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <script>
-// 🔥 СЕНІҢ FIREBASE-ІҢ - ДАЙЫН!
 const firebaseConfig = {
   apiKey: "AIzaSyAlmAoxV5nz8vAH1eI15r6PNgG0BXkUJX4",
   authDomain: "quizz-bliim.firebaseapp.com",
@@ -62,8 +64,9 @@ const firebaseConfig = {
   appId: "1:759878101581:web:e966e63c2e183b7b8a8a04",
   measurementId: "G-HJ1B4CDZBW"
 };
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+try{ firebase.initializeApp(firebaseConfig); }catch(e){ console.log(e); }
+let db = null;
+try{ db = firebase.database(); }catch(e){ db = null; }
 </script>
 <script>
 let Q=[
@@ -75,4 +78,117 @@ let Q=[
 ["What is 'Book'?","Book","Pen","Table","Book"],
 ["What is 'Sun'?","Sun","Moon","Star","Sun"],
 ["What is 'Water'?","Water","Milk","Bread","Water"],
-["
+["5 + 3 = ?","8","7","9","8"],
+["What is 'House'?","House","Car","Tree","House"],
+["What is 'Red'?","Red","Blue","Black","Red"],
+["10 - 4 = ?","6","5","7","6"],
+["What is 'Mother'?","Mother","Father","Brother","Mother"],
+["What is 'School'?","School","Home","Shop","School"],
+["What is 'Pen'?","Pen","Book","Bag","Pen"],
+["3 x 2 = ?","6","5","4","6"],
+["What is 'Bird'?","Bird","Fish","Cat","Bird"],
+["What is 'Milk'?","Milk","Water","Tea","Milk"],
+["What is 'Teacher'?","Teacher","Doctor","Driver","Teacher"],
+["7 + 5 = ?","12","11","13","12"]
+];
+let myName="", score=0, qi=0, answered=false, finished=false;
+
+function showMsg(t, isError){
+  document.getElementById("msg").innerHTML = '<div class="'+(isError?'error':'warn')+'">'+t+'</div>';
+}
+
+function kiru(){
+  let f = document.getElementById("firstName").value.trim();
+  let l = document.getElementById("lastName").value.trim();
+  if(!f || !l){ showMsg("❗ Аты-жөніңді толық жаз!", true); return; }
+  myName = f + " " + l;
+  localStorage.setItem("quiz_name", myName);
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("main").classList.remove("hidden");
+  document.getElementById("topBar").classList.remove("hidden");
+  document.getElementById("user").innerText = myName;
+  document.getElementById("topName").innerText = myName;
+  document.getElementById("topScore").innerText = "0";
+  if(myName.toLowerCase().includes("ақсұлтан")) document.getElementById("adminBox").classList.remove("hidden");
+  loadScores();
+}
+
+function start(){
+  if(finished) return;
+  score=0; qi=0; answered=false;
+  document.getElementById("startBtn").classList.add("hidden");
+  document.getElementById("finishBox").classList.add("hidden");
+  showQuestion();
+}
+
+function showQuestion(){
+  if(qi >= Q.length){ finish(); return; }
+  answered=false;
+  let q = Q[qi];
+  // араластыру
+  let opts = [q[1], q[2], q[3]].sort(()=>Math.random()-0.5);
+  let html = '<div class="q"><h3>'+(qi+1)+'. '+q[0]+'</h3>';
+  opts.forEach(o=>{
+    html += '<button onclick="answer(this,\''+o+'\')">'+o+'</button>';
+  });
+  html += '</div><p>'+(qi+1)+' / 20</p>';
+  document.getElementById("quiz").innerHTML = html;
+}
+
+function answer(btn, val){
+  if(answered) return;
+  answered=true;
+  let q = Q[qi];
+  let btns = document.querySelectorAll(".q button");
+  btns.forEach(b=>b.disabled=true);
+  if(val === q[4]){
+    score++;
+    btn.style.background="#2e7d32"; btn.style.color="#fff";
+  } else {
+    btn.style.background="#d32f2f"; btn.style.color="#fff";
+    btns.forEach(b=>{ if(b.innerText===q[4]){ b.style.background="#2e7d32"; b.style.color="#fff"; } });
+  }
+  document.getElementById("topScore").innerText = score;
+  setTimeout(()=>{ qi++; showQuestion(); }, 800);
+}
+
+function finish(){
+  finished=true;
+  document.getElementById("quiz").innerHTML="";
+  document.getElementById("finishBox").classList.remove("hidden");
+  document.getElementById("finalName").innerText = myName;
+  document.getElementById("finalScore").innerText = score;
+  document.getElementById("finalText").innerText = score>=15 ? "🔥 Жарайсың!" : score>=10 ? "👍 Жақсы!" : "💪 Тағы тырыс!";
+}
+
+function sendScore(){
+  // localStorage-қа сақтау
+  let all = JSON.parse(localStorage.getItem("all_scores")||"{}");
+  all[myName]=score;
+  localStorage.setItem("all_scores", JSON.stringify(all));
+  // Firebase-ке жіберу
+  if(db){
+    db.ref("scores/"+myName.replace(/[^a-zA-Z0-9а-яА-Я_]/g,"_")).set({name:myName, score:score}).catch(()=>{});
+  }
+  document.getElementById("sendMsg").innerText="✅ Ұпай жіберілді!";
+  loadScores();
+}
+
+function loadScores(){
+  let all = JSON.parse(localStorage.getItem("all_scores")||"{}");
+  let tbody = document.getElementById("allScores");
+  let html="";
+  for(let k in all){ html+="<tr><td>"+k+"</td><td>"+all[k]+"</td></tr>"; }
+  tbody.innerHTML = html || "<tr><td colspan='2'>Әлі ешкім тапсырмады</td></tr>";
+  if(db){
+    db.ref("scores").once("value").then(snap=>{
+      let v = snap.val()||{};
+      let h="";
+      for(let k in v){ h+="<tr><td>"+v[k].name+"</td><td>"+v[k].score+"</td></tr>"; }
+      if(h) tbody.innerHTML=h;
+    }).catch(()=>{});
+  }
+}
+
+function clearAll(){
+  if(confirm("Барлығын өшіресің бе

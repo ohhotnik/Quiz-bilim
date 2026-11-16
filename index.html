@@ -29,7 +29,6 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 </head>
 <body>
 
-<!-- 1-ШІ БЕТ: КІРУ -->
 <div id="login" class="box">
 <h2 style="text-align:center">📚 9-класс • 2-четверть</h2>
 <p style="text-align:center;color:#666">Бірінші кіру керек!</p>
@@ -39,42 +38,38 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 <input id="aty" placeholder="Имя">
 <button onclick="kiru()">✅ Войти</button>
 <p id="msg" style="color:red;text-align:center"></p>
-
 <div class="enteredBox">
 <h3 style="margin:0">👥 Кіргендер (<span id="enteredCount">0</span>):</h3>
 <div id="enteredList">Жүктелуде...</div>
 </div>
-
 <h3>🏆 Кто сдал?</h3>
 <button class="gray" onclick="loadLeader()">🔄 Обновить</button>
 <table><tr><th>Имя</th><th>Предмет</th><th>Балл</th><th>Результат</th></tr><tbody id="board1"></tbody></table>
 </div>
 
-<!-- 2-ШІ БЕТ: КІТАПТАР -->
 <div id="subjects" class="box hidden">
 <h2>Привет, <span class="showName"></span>! 👋</h2>
 <p style="text-align:center;color:#666">Кітапты бас — тест ашылады!</p>
-<button class="bookCard" onclick="selectSubject('phys','⚡ Физика • Казахбаева')"><img src="https://frankfurt.apollo.olxcdn.com/v1/files/36nbi0s4xq8y2-KZ/image;s=1125x2000"><div><b>⚡ Физика</b><br><small>Казахбаева / Мектеп<br>10 сұрақ</small></div></button>
-<button class="bookCard" onclick="selectSubject('alg','🔢 Алгебра • Шыныбеков')"><img src="https://gdz.top/media/algebra_09/shynybekov-u19/rus0-1/cover-1.webp"><div><b>🔢 Алгебра</b><br><small>Шыныбеков / Атамұра<br>10 сұрақ</small></div></button>
-<button class="bookCard" onclick="selectSubject('chem','🧪 Химия • Оспанова')"><img src="https://i.bibliofan.ru/720352/conversions/q0cpJpsuOteTNZOLDdKRwCqxy-main.jpg"><div><b>🧪 Химия</b><br><small>Оспанова / Мектеп<br>10 сұрақ</small></div></button>
-<button class="bookCard" onclick="selectSubject('rus','📚 Русский язык и литература • Пушкин')"><img src="https://cdn.100sp.ru/pictures/1477101673"><div><b>📚 Русский язык</b><br><small>Сабитова / Пушкин<br>10 сұрақ</small></div></button>
-<button class="bookCard" onclick="selectSubject('eng','🇬🇧 Английский • Excel')"><img src="https://m.media-amazon.com/images/I/71K0uW7qBJL._AC_UF1000,1000_QL80_.jpg"><div><b>🇬🇧 Английский</b><br><small>Excel<br>10 сұрақ</small></div></button>
-<button class="bookCard" onclick="selectSubject('bio','🧬 Биология')"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=300"><div><b>🧬 Биология</b><br><small>Биология 9<br>10 сұрақ</small></div></button>
-<button class="bookCard" onclick="selectSubject('inf','💻 Информатика')"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300"><div><b>💻 Информатика</b><br><small>Информатика 9<br>10 сұрақ</small></div></button>
-<button class="bookCard" onclick="selectSubject('geom','📐 Геометрия')"><img src="https://images.unsplash.com/photo-1596496181848-3091d4878b24?w=300"><div><b>📐 Геометрия</b><br><small>Смирнов<br>10 сұрақ</small></div></button>
+<button class="bookCard" onclick="selectSubject('phys','⚡ Физика • Казахбаева')"><img src="https://frankfurt.apollo.olxcdn.com/v1/files/36nbi0s4xq8y2-KZ/image;s=1125x2000"><div><b>⚡ Физика</b><br><small>Казахбаева / Мектеп<br>10 сұрақ • Қазақша</small></div></button>
+<button class="bookCard" onclick="selectSubject('alg','🔢 Алгебра • Шыныбеков')"><img src="https://gdz.top/media/algebra_09/shynybekov-u19/rus0-1/cover-1.webp"><div><b>🔢 Алгебра</b><br><small>Шыныбеков / Атамұра<br>10 сұрақ • Қазақша</small></div></button>
+<button class="bookCard" onclick="selectSubject('chem','🧪 Химия • Оспанова')"><img src="https://i.bibliofan.ru/720352/conversions/q0cpJpsuOteTNZOLDdKRwCqxy-main.jpg"><div><b>🧪 Химия</b><br><small>Оспанова / Мектеп<br>10 сұрақ • Қазақша</small></div></button>
+<button class="bookCard" onclick="selectSubject('rus','📚 Русский язык и литература • Пушкин')"><img src="https://cdn.100sp.ru/pictures/1477101673"><div><b>📚 Русский язык</b><br><small>Сабитова / Пушкин<br>10 вопросов • На русском</small></div></button>
+<button class="bookCard" onclick="selectSubject('eng','🇬🇧 Английский • Excel')"><img src="https://m.media-amazon.com/images/I/71K0uW7qBJL._AC_UF1000,1000_QL80_.jpg"><div><b>🇬🇧 Английский</b><br><small>Excel<br>10 questions • In English</small></div></button>
+<button class="bookCard" onclick="selectSubject('bio','🧬 Биология')"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=300"><div><b>🧬 Биология</b><br><small>Биология 9<br>10 сұрақ • Қазақша</small></div></button>
+<button class="bookCard" onclick="selectSubject('inf','💻 Информатика')"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300"><div><b>💻 Информатика</b><br><small>Информатика 9<br>10 сұрақ • Қазақша</small></div></button>
+<button class="bookCard" onclick="selectSubject('geom','📐 Геометрия')"><img src="https://images.unsplash.com/photo-1596496181848-3091d4878b24?w=300"><div><b>📐 Геометрия</b><br><small>Смирнов<br>10 сұрақ • Қазақша</small></div></button>
 <div class="enteredBox"><h3 style="margin:0">👥 Кіргендер:</h3><div id="enteredList2"></div></div>
 <h3>🏆 Рейтинг</h3>
 <table><tr><th>Имя</th><th>Предмет</th><th>Балл</th><th>Результат</th></tr><tbody id="boardSub"></tbody></table>
 <button class="gray" onclick="logout()">🚪 Шығу (атың сақталады!)</button>
 </div>
 
-<!-- 3-ШІ БЕТ: ТЕСТ -->
 <div id="main" class="box hidden">
 <h2><span id="subjectTitle"></span></h2>
 <img id="bookImg" class="bookTop" src="">
 <p>Привет, <span class="showName"></span>!</p>
 <div id="timerBox" class="timerBox hidden">
-<div>Вопрос: <b><span id="qNum">1</span> / <span id="qTotal">10</span></b> | Балл: <b><span id="scoreNow">0</span>/10</b></div>
+<div>Вопрос: <b><span id="qNum">1</span> / <span id="qTotal">10</span></b> | Балл: <b><span id="scoreNow">0</span>/10</b> | ⚠️ Шығу: <b><span id="warnCount">0 / 2</span></b></div>
 <div class="timerBig" id="timerText">02:00</div>
 </div>
 <button id="startBtn" onclick="start()">▶️ Начать тест</button>
@@ -92,6 +87,15 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 <button class="gray" onclick="logout()">🚪 Шығу</button>
 </div>
 
+<div id="warnBox" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box">
+<div style="background:#fff;padding:25px;border-radius:15px;text-align:center;max-width:350px;width:100%">
+<div style="font-size:70px">😟</div><h2>Ай, шықпашы!</h2><p>Экраннан шығып кеттің!<br>Үй батырмасын / Стрелканы баспа!<br><br>Тағы 1 рет шықсаң тест бітеді!</p>
+<button onclick="closeWarn()" style="background:red">Түсіндім, қайтамын</button></div></div>
+
+<div id="cryScreen" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a1a2e;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;box-sizing:border-box">
+<div style="font-size:110px">😭</div><h1 style="color:#fff">Тесттен шығарылдың!</h1><p style="color:#fff">Экраннан шығып кеттің!<br>Үй / Стрелка басуға болмайды!</p><p style="color:#ff6b6b"><b>Балл: 0 / 10</b></p>
+<button onclick="location.reload()" style="background:#2e9e4f;max-width:300px">🔄 Қайта бастау</button></div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -100,17 +104,24 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 let myName="", score=0, qi=0, answered=false, currentSubject="", currentSubjectTitle="";
 let timeLeft=120, timerInterval=null, Q=[];
+let cheatCount=0, testStarted=false;
 const IMGS = { phys:"https://frankfurt.apollo.olxcdn.com/v1/files/36nbi0s4xq8y2-KZ/image;s=1125x2000", alg:"https://gdz.top/media/algebra_09/shynybekov-u19/rus0-1/cover-1.webp", chem:"https://i.bibliofan.ru/720352/conversions/q0cpJpsuOteTNZOLDdKRwCqxy-main.jpg", rus:"https://cdn.100sp.ru/pictures/1477101673", eng:"https://m.media-amazon.com/images/I/71K0uW7qBJL._AC_UF1000,1000_QL80_.jpg", bio:"https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600", inf:"https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600", geom:"https://images.unsplash.com/photo-1596496181848-3091d4878b24?w=600" };
 const SUBJECTS = {
-phys: [["2-й закон Ньютона?",["F = ma","E = mc2","V = S/t"],"RiA9IG1h"],["Формула скорости?",["V = S/t","F = ma","A = F*S"],"ViA9IFMvdA=="],["Единица силы?",["Джоуль","Ньютон","Ватт"],"Tnl1dG9u"],["Единица энергии?",["Ньютон","Джоуль","Метр"],"Sm91bGU="],["Ускорение g?",["9,8 м/с²","10 м/с","5 м/с²"],"OSw4IG0vcyY="],["Формула работы?",["A = F*S","V = S/t","F = ma"],"QSA9IEYqUw=="],["Единица мощности?",["Ватт","Джоуль","Ньютон"],"VmF0dA=="],["Масса измеряется?",["Весами","Линейкой","Часами"],"QmVjYW1p"],["Что такое инерция?",["Сохранение скорости телом","Падение тела","Нагрев тела"],"U29jaHJhbmVuaWUgc2tvcm9zdGkgdGVsb20="],["Куда направлена сила тяжести?",["К Земле","К небу","Вбок"],"SyBaZW1sZQ=="]],
-alg: [["x² = 25, x = ?",["4","5","6"],"NQ=="],["2x = 10, x = ?",["4","5","6"],"NQ=="],["Корни x² - 5x + 6 = 0?",["2 и 3","1 и 6","2 и 4"],"MiBpIDM="],["3² + 4² = ?",["25","20","16"],"MjU="],["y = 2x, x=3, y = ?",["5","6","7"],"Ng=="],["√144 = ?",["11","12","13"],"MTI="],["Теорема Пифагора?",["a²+b²=c²","a+b=c","a²-b²=c²"],"YcK0YisywrI9Y8Ky"],["5! = ?",["100","120","60"],"MTIw"],["-3 + 8 = ?",["5","-5","11"],"NQ=="],["√81 = ?",["8","9","10"],"OQ=="]],
-chem: [["Кто создал таблицу?",["Менделеев","Ньютон","Эйнштейн"],"TWVuZGVsZWV2"],["Формула воды?",["CO2","H2O","O2"],"SDJv"],["Знак натрия?",["Na","N","Ne"],"TmE="],["Знак кислорода?",["H","O","C"],"Tw=="],["Ковалентная связь?",["Общее пользование электронами","Отдача электронов","Отдача протонов"],"T2JzY2hlZSBwb2x6b3ZhbmllIGVsZWt0cm9ub3Y="],["Вкус кислот?",["Сладкий","Кислый","Горький"],"S2lzbHlp"],["Формула HCl?",["H2SO4","HCl","HNO3"],"SENs"],["Металл?",["Железо","Кислород","Углекислый газ"],"WmVsZXpv"],["Хим. реакция?",["Превращение веществ","Растворение","Затвердевание"],"UHJldnJhc2hjaGVuaWUgdmVzaGNoZXN0dg=="],["Периодов?",["5","7","8"],"Nw=="]],
+phys: [["Ньютонның 2-заңы?",["F = ma","E = mc2","V = S/t"],"RiA9IG1h"],["Жылдамдық формуласы?",["V = S/t","F = ma","A = F*S"],"ViA9IFMvdA=="],["Күштің өлшем бірлігі?",["Джоуль","Ньютон","Ватт"],"0J3RjNGO0YLQvtC9"],["Энергияның өлшем бірлігі?",["Ньютон","Джоуль","Метр"],"0JTQttC+0YPQu9GM"],["g үдеуі?",["9,8 м/с²","10 м/с","5 м/с²"],"OSw4INC8L9GBwrI="],["Жұмыс формуласы?",["A = F*S","V = S/t","F = ma"],"QSA9IEYqUw=="],["Қуаттың өлшем бірлігі?",["Ватт","Джоуль","Ньютон"],"0JLQsNGC0YI="],["Масса немен өлшенеді?",["Таразымен","Сызғышпен","Сағатпен"],"0KLQsNGA0LDQt9GL0LzQtdC9"],["Инерция деген не?",["Дененің жылдамдығын сақтауы","Дененің құлауы","Дененің қызуы"],"0JTQtdC90LXQvdGW0qMg0LbRi9C70LTQsNC80LTRi9KT0YvQvSDRgdCw0pvRgtCw0YPRiw=="],["Ауырлық күші қайда бағытталған?",["Жерге","Аспанға","Жан-жаққа"],"0JbQtdGA0LPQtQ=="]],
+alg: [["x² = 25, x = ?",["4","5","6"],"NQ=="],["2x = 10, x = ?",["4","5","6"],"NQ=="],["x² - 5x + 6 = 0 түбірлері?",["2 мен 3","1 мен 6","2 мен 4"],"MiDQvNC10L0gMw=="],["3² + 4² = ?",["25","20","16"],"MjU="],["y = 2x, x=3, y = ?",["5","6","7"],"Ng=="],["√144 = ?",["11","12","13"],"MTI="],["Пифагор теоремасы?",["a²+b²=c²","a+b=c","a²-b²=c²"],"YcKyK2LCsj1jwrI="],["5! = ?",["100","120","60"],"MTIw"],["-3 + 8 = ?",["5","-5","11"],"NQ=="],["√81 = ?",["8","9","10"],"OQ=="]],
+chem: [["Кестені кім жасады?",["Менделеев","Ньютон","Эйнштейн"],"0JzQtdC90LTQtdC70LXQtdCy"],["Судың формуласы?",["CO2","H2O","O2"],"SDJP"],["Натрийдің белгісі?",["Na","N","Ne"],"TmE="],["Оттегінің белгісі?",["H","O","C"],"Tw=="],["Коваленттік байланыс?",["Электрондарды ортақ пайдалану","Электрондарды беру","Протондарды беру"],"0K3Qu9C10LrRgtGA0L7QvdC00LDRgNC00Ysg0L7RgNGC0LDSmyDQv9Cw0LnQtNCw0LvQsNC90YM="],["Қышқылдың дәмі?",["Тәтті","Қышқыл","Ащы"],"0prRi9GI0pvRi9C7"],["HCl формуласы?",["H2SO4","HCl","HNO3"],"SENs"],["Металл қайсы?",["Темір","Оттегі","Көмірқышқыл газы"],"0KLQtdC80ZbRgA=="],["Химиялық реакция?",["Заттардың түрленуі","Еру","Қату"],"0JfQsNGC0YLQsNGA0LTRi9KjINGC0q/RgNC70LXQvdGD0ZY="],["Период саны?",["5","7","8"],"Nw=="]],
 rus: [["Кто написал 'Евгений Онегин'?",["Лермонтов","Пушкин","Гоголь"],"UHVzaGtpbg=="],["Кто автор 'Герой нашего времени'?",["Пушкин","Лермонтов","Толстой"],"TGVybW9udG92"],["Письмо Татьяны?",["Письмо Татьяны","Письмо Онегина","Дуэль"],"UGFzeW1vIFRhdHlhbnk="],["Кто такой Онегин?",["Крестьянин","Дворянин, лишний человек","Купец"],"RHZvcmFuaW4sIGxpc2huaWkgY2hlbG92ZWs="],["Жанр 'Евгений Онегин'?",["Роман в стихах","Повесть","Рассказ"],"Um9tYW4gdiBzdGlraGFr"],["Кто написал 'Мёртвые души'?",["Гоголь","Пушкин","Чехов"],"R29nb2w="],["Метафора?",["Скрытое сравнение","Прямое сравнение","Преувеличение"],"U2tyeXRvZSBzcmF2bmVuaWU="],["Эпитет?",["Художественное определение","Вопрос","Восклицание"],"S2h1ZG96aGVzdHZlbm5vZSBvcHJlZGVsZW5pZQ=="],["Слогов в ямбе?",["2","3","4"],"Mg=="],["Кто написал 'Капитанская дочка'?",["Пушкин","Лермонтов","Тургенев"],"UHVzaGtpbg=="]],
 eng: [["She ___ to school.",["go","goes","going"],"Z29lcw=="],["Past of 'go'?",["goed","went","gone"],"d2VudA=="],["'кітап' in English?",["Pen","Book","Table"],"Qm9vaw=="],["He ___ playing now.",["is","are","am"],"aXM="],["I ___ seen this film.",["have","has","had"],"aGF2ZQ=="],["Opposite of 'hot'?",["Cold","Warm","Big"],"Q29sZA=="],["'ана' in English?",["Father","Mother","Brother"],"TW90aGVy"],["They ___ friends.",["is","are","am"],"YXJl"],["Past of 'eat'?",["eated","ate","eaten"],"YXRl"],["___ apple a day.",["An","A","The"],"QW4="]],
-bio: [["Энергостанция клетки?",["Ядро","Митохондрия","Рибосома"],"TWl0b2hob25kcml5YQ=="],["Фотосинтез где?",["В корне","В листе","В цветке"],"ViBsaXN0ZQ=="],["ДНК хранит?",["Наследственную информацию","Воду","Энергию"],"TmFzbGVkc3R2ZW5udXl1IGluZm9ybWF0c2l5dQ=="],["Хромосом у человека?",["44","46","48"],"NDY="],["Центр кровообращения?",["Лёгкие","Сердце","Печень"],"U2VyZHRzZQ=="],["Растения выделяют?",["Углекислый газ","Кислород","Азот"],"S2lzbG9yb2Q="],["Центр управления клеткой?",["Ядро","Цитоплазма","Мембрана"],"WcO5cm8="],["Вирус — это?",["Живой организм","Неживая частица","Бактерия"],"TmV6aXZhYSBjaGFzdGl0c2E="],["Костей у человека?",["100","206","300"],"MjA2"],["Ген — это?",["Единица наследственности","Клетка","Белок"],"RWRpbml0c2EgbmFzbGVkc3R2ZW5ub3N0aQ=="]],
-inf: [["Что такое информация?",["Данные","Компьютер","Мышка"],"RGFubnll"],["Единица информации?",["Бит","Байт","Килограмм"],"Qml0"],["1 Байт = ?",["8 бит","10 бит","100 бит"],"OCBiaXQ="],["Процессор?",["Мозг компьютера","Монитор","Клавиатура"],"TW96ZyBrb21weXV0ZXJh"],["Интернет?",["Всемирная сеть","Программа","Игра"],"VmV0a2VtaXJuYXlhIHNldA=="],["Текстовый файл?",[".txt",".jpg",".mp3"],"LnR4dA=="],["Алгоритм?",["Порядок действий","Игра","Картинка"],"UG9yeWFkb2sgZGV5c3R2aXk="],["Пароль для?",["Для защиты","Для игры","Для красоты"],"RGx5YSB6YXNoaXR5"],["Файл?",["Данные на диске","Папка","Монитор"],"RGFubnllIG5hIGRpc2tl"],["Бит в 1 Кбайте?",["1024","1000","512"],"MTAyNA=="]],
-geom: [["Сумма углов треугольника?",["180°","90°","360°"],"MTgw4oCw"],["Теорема Пифагора?",["a²+b²=c²","a+b=c","a²-b²=c²"],"YcK0YisywrI9Y8Ky"],["Площадь прямоугольника?",["a*b","a+b","a-b"],"YSpi"],["Сторон у треугольника?",["2","3","4"],"Mw=="],["Диаметр = ?",["2 радиуса","1 радиус","3 радиуса"],"MiByYWRpdXNh"],["Периметр квадрата 5?",["20","25","10"],"MjA="],["Гипотенуза?",["Самая длинная сторона","Короткая сторона","Угол"],"U2FtYXlhIGRsaW5uYXlhIHN0b3JvbmE="],["Площадь круга?",["πr²","2πr","πr"],"z4FywrI="],["Угол 90°?",["Прямой","Острый","Тупой"],"UHJ5YW1veQ=="],["Градусов в окружности?",["180","270","360"],"MzYw"]]
+bio: [["Жасушаның энергия станциясы?",["Ядро","Митохондрия","Рибосома"],"0JzQuNGC0L7RhdC+0L3QtNGA0LjRjw=="],["Фотосинтез қайда жүреді?",["Тамырда","Жапырақта","Гүлде"],"0JbQsNC/0YvRgNCw0pvRgtCw"],["ДНҚ нені сақтайды?",["Тұқым қуалау ақпаратын","Суды","Энергияны"],"0KLSsdKb0YvQvCDSm9GD0LDQu9Cw0YMg0LDSm9C/0LDRgNCw0YLRi9C9"],["Адамда неше хромосома?",["44","46","48"],"NDY="],["Қан айналым орталығы?",["Өкпе","Жүрек","Бауыр"],"0JbSr9GA0LXQug=="],["Өсімдіктер нені бөледі?",["Көмірқышқыл газы","Оттегі","Азот"],"0J7RgtGC0LXQs9GW"],["Жасушаны басқаратын орталық?",["Ядро","Цитоплазма","Мембрана"],"0KQtNGA0L4="],["Вирус деген не?",["Тірі ағза","Тірі емес бөлшек","Бактерия"],"0KLRltGA0ZYg0LXQvNC10YEg0LHTqdC70YjQtdC6"],["Адамда неше сүйек?",["100","206","300"],"MjA2"],["Ген деген не?",["Тұқым қуалау бірлігі","Жасуша","Ақуыз"],"0KLSsdKb0YvQvCDSm9GD0LDQu9Cw0YMg0LHRltGA0LvRltCz0ZY="]],
+inf: [["Ақпарат деген не?",["Мәліметтер","Компьютер","Тышқан"],"0JzTmdC70ZbQvNC10YLRgtC10YA="],["Ақпарат бірлігі?",["Бит","Байт","Килограмм"],"0JHQuNGC"],["1 Байт = ?",["8 бит","10 бит","100 бит"],"OCDQsdC40YI="],["Процессор деген не?",["Компьютердің миы","Монитор","Пернетақта"],"0JrQvtC80L/RjNGO0YLQtdGA0LTRltKjINC80LjRiw=="],["Интернет деген не?",["Бүкіләлемдік желі","Бағдарлама","Ойын"],"0JHSr9C60ZbQu9OZ0LvQtdC80LTRltC6INC20LXQu9GW"],["Мәтіндік файл?",[".txt",".jpg",".mp3"],"LnR4dA=="],["Алгоритм деген не?",["Әрекеттер реті","Ойын","Сурет"],"05jRgNC10LrQtdGC0YLQtdGAINGA0LXRgtGW"],["Құпия сөз не үшін?",["Қорғау үшін","Ойын үшін","Әдемілік үшін"],"0prQvtGA0pPQsNGDINKv0YjRltC9"],["Файл деген не?",["Дискідегі мәліметтер","Қалта","Монитор"],"0JTQuNGB0LrRltC00LXQs9GWINC805nQu9GW0LzQtdGC0YLQtdGA"],["1 Кбайтта неше бит?",["1024","1000","512"],"MTAyNA=="]],
+geom: [["Үшбұрыштың бұрыштарының қосындысы?",["180°","90°","360°"],"MTgwwrA="],["Пифагор теоремасы?",["a²+b²=c²","a+b=c","a²-b²=c²"],"YcKyK2LCsj1jwrI="],["Тіктөртбұрыш ауданы?",["a*b","a+b","a-b"],"YSpi"],["Үшбұрыштың қабырғасы?",["2","3","4"],"Mw=="],["Диаметр = ?",["2 радиус","1 радиус","3 радиус"],"MiDRgNCw0LTQuNGD0YE="],["Қабырғасы 5 квадраттың периметрі?",["20","25","10"],"MjA="],["Гипотенуза деген не?",["Ең ұзын қабырға","Қысқа қабырға","Бұрыш"],"0JXSoyDSsdC30YvQvSDSm9Cw0LHRi9GA0pPQsA=="],["Дөңгелек ауданы?",["πr²","2πr","πr"],"z4BywrI="],["90° бұрыш?",["Тік","Сүйір","Доғал"],"0KLRltC6"],["Шеңберде неше градус?",["180","270","360"],"MzYw"]]
 };
+
+// 🔒 СТРЕЛКАНЫ БҰҒАТТАУ ҮШІН - 10 РЕТ ҚОСЫП ҚОЯМЫЗ
+function lockBack(){
+  for(let i=0;i<10;i++){ history.pushState(null,"",location.href); }
+}
+lockBack();
 
 window.kiru=function(){
   let f=document.getElementById("fam").value.trim();
@@ -158,17 +169,37 @@ window.selectSubject=function(key,title){
   document.getElementById("finishBox").classList.add("hidden");
   document.getElementById("quiz").innerHTML="";
 }
-window.backToSubjects=function(){ clearInterval(timerInterval); document.getElementById("main").classList.add("hidden"); document.getElementById("subjects").classList.remove("hidden"); }
-window.start=function(){ score=0; qi=0; document.getElementById("startBtn").classList.add("hidden"); document.getElementById("finishBox").classList.add("hidden"); document.getElementById("timerBox").classList.remove("hidden"); document.getElementById("scoreNow").innerText="0"; showQ(); }
+window.backToSubjects=function(){ clearInterval(timerInterval); testStarted=false; document.getElementById("main").classList.add("hidden"); document.getElementById("subjects").classList.remove("hidden"); }
+window.start=function(){ score=0; qi=0; cheatCount=0; testStarted=true; document.getElementById("warnCount").innerText="0 / 2"; lockBack(); document.getElementById("startBtn").classList.add("hidden"); document.getElementById("finishBox").classList.add("hidden"); document.getElementById("timerBox").classList.remove("hidden"); document.getElementById("scoreNow").innerText="0"; showQ(); }
 function startTimer(){ clearInterval(timerInterval); timeLeft=120; updateTimerUI(); timerInterval=setInterval(()=>{ timeLeft--; updateTimerUI(); if(timeLeft<=0){ clearInterval(timerInterval); qi++; showQ(); } },1000); }
 function updateTimerUI(){ let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById("timerText").innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s); }
 function showQ(){ if(qi>=Q.length){ finish(); return; } answered=false; document.getElementById("qNum").innerText=qi+1; let h='<div class="q"><h3>'+(qi+1)+'. '+Q[qi].q+'</h3>'; Q[qi].opts.forEach(o=>{ h+='<button onclick="answer(this,\''+o.replace(/'/g,"\\'")+'\')">'+o+'</button>'; }); h+='</div>'; document.getElementById("quiz").innerHTML=h; startTimer(); }
 window.answer=function(btn,val){ if(answered) return; answered=true; clearInterval(timerInterval); let correct=Q[qi].ans; document.querySelectorAll(".q button").forEach(b=>b.disabled=true); if(val===correct){ score++; btn.style.background="#2e9e4f"; btn.style.color="#fff"; } else{ btn.style.background="#e0e0e0"; } document.getElementById("scoreNow").innerText=score; setTimeout(()=>{ qi++; showQ(); },400); }
-function finish(){ clearInterval(timerInterval); document.getElementById("quiz").innerHTML=""; document.getElementById("timerBox").classList.add("hidden"); document.getElementById("finishBox").classList.remove("hidden"); document.getElementById("finalScore").innerText=score; let need=Math.ceil(Q.length/2); let passed=score>=need; document.getElementById("finalText").innerHTML=passed?"<span class='ok'>✅ СДАЛ! "+score+"/10</span>":"<span class='no'>❌ Не сдал! "+score+"/10</span>"; }
+function finish(){ testStarted=false; clearInterval(timerInterval); document.getElementById("quiz").innerHTML=""; document.getElementById("timerBox").classList.add("hidden"); document.getElementById("finishBox").classList.remove("hidden"); document.getElementById("finalScore").innerText=score; let need=Math.ceil(Q.length/2); let passed=score>=need; document.getElementById("finalText").innerHTML=passed?"<span class='ok'>✅ СДАЛ! "+score+"/10</span>":"<span class='no'>❌ Не сдал! "+score+"/10</span>"; }
 window.sendScore=function(){ let key=(myName+"_"+currentSubject+"_"+Date.now()).replace(/[^a-zA-Z0-9а-яА-Я]/g,"_"); let need=Math.ceil(Q.length/2); let passed=score>=need?"✅ Сдал":"❌ Не сдал"; set(ref(db,"results/"+key),{name:myName, subject:currentSubjectTitle, score:score+"/"+Q.length, scoreNum:score, result:passed, time:Date.now()}); document.getElementById("sendMsg").innerText="✅ Сақталды!"; loadLeader(); }
 window.loadLeader=function(){ onValue(ref(db,"results/"),(snap)=>{ let data=snap.val()||{}; let arr=Object.values(data).sort((a,b)=>(b.scoreNum||0)-(a.scoreNum||0)); let h=""; arr.forEach(u=>{ h+="<tr><td>"+u.name+"</td><td>"+(u.subject||"")+"</td><td>"+u.score+"</td><td>"+u.result+"</td></tr>"; }); if(!h) h="<tr><td colspan='4'>Пока никто не сдал</td></tr>"; ["board1","board2","boardSub"].forEach(id=>{ let el=document.getElementById(id); if(el) el.innerHTML=h; }); }); }
 
-// ✅ ОБНОВИТЬ ЕТСЕ - КІРУ БЕТІНЕ БАРМАЙДЫ, КІТАПТАР БЕТІНДЕ ҚАЛАДЫ
+// ✅ ҮЙ + СТРЕЛКА - АНТИЧИТ - FIREFOX АШЫЛМАЙДЫ
+window.closeWarn=function(){ document.getElementById("warnBox").classList.add("hidden"); lockBack(); }
+function caughtCheating(){
+  if(!testStarted) return;
+  cheatCount++;
+  document.getElementById("warnCount").innerText=cheatCount+" / 2";
+  if(cheatCount>=2){
+    testStarted=false; clearInterval(timerInterval); score=0;
+    document.getElementById("quiz").innerHTML="";
+    document.getElementById("warnBox").classList.add("hidden");
+    document.getElementById("cryScreen").classList.remove("hidden");
+    return;
+  }
+  document.getElementById("warnBox").classList.remove("hidden");
+  lockBack();
+}
+document.addEventListener("visibilitychange",()=>{ if(document.hidden) caughtCheating(); });
+window.addEventListener("blur",()=>{ caughtCheating(); });
+window.addEventListener("popstate",()=>{ lockBack(); caughtCheating(); });
+window.addEventListener("beforeunload",(e)=>{ if(testStarted){ e.preventDefault(); e.returnValue=""; } });
+
 try{
   let saved=localStorage.getItem("myName");
   if(saved){

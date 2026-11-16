@@ -3,66 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Айтыс</title>
+<title>Айтыс - Білімді Тексеру</title>
 <style>
-  body { font-family: Arial; background: #f2f2f2; margin: 0; padding: 20px; text-align: center; }
-  .box { background: white; max-width: 400px; margin: 50px auto; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-  input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ccc; font-size: 16px; }
-  button { width: 95%; padding: 12px; background: #6a11cb; color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; }
-  button:hover { background: #4a0ea0; }
-  .hidden { display: none; }
+body{font-family:Arial;background:#f0f2f5;padding:12px;margin:0}
+.box{background:#fff;padding:20px;border-radius:15px;max-width:500px;margin:10px auto}
+input,textarea{width:100%;padding:13px;margin:8px 0 12px;border:1px solid #ccc;border-radius:10px;box-sizing:border-box;font-size:16px}
+button{width:100%;padding:14px;background:#6a11cb;color:#fff;border:0;border-radius:10px;font-size:17px;margin-top:10px;cursor:pointer}
+button.gray{background:#e0e0e0;color:#222}
+.q button{background:#fff;color:#222;border:1px solid #ccc}
+.hidden{display:none!important}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+td,th{border:1px solid #ddd;padding:8px;text-align:left}
+.timerBox{background:#1a1a2e;color:#fff;padding:12px;border-radius:12px;text-align:center;position:sticky;top:5px;z-index:100}
+.timerBig{font-size:28px;font-weight:bold}
+.timerBar{height:8px;background:#333;border-radius:10px;margin-top:8px;overflow:hidden}
+.timerFill{height:100%;background:#2e9e4f;width:100%;transition:width 1s linear}
+.timerFill.red{background:red}
 </style>
 </head>
 <body>
 
-<!-- КІРУ БЕТІ -->
-<div id="kiruBet" class="box">
-  <h2>Кіру</h2>
-  <p>Фамилия мен аты</p>
-  <input id="atyInput" type="text" placeholder="Фамилия мен аты">
-  <button onclick="kiru()">Кіру</button>
+<!-- КІРУ -->
+<div id="login" class="box">
+<h2 style="text-align:center">Айтыс 🔥</h2>
+<p style="text-align:center;color:#666">Емайл керек емес!</p>
+<label><b>Фамилия</b></label>
+<input id="fam" placeholder="Фамилия">
+<label><b>Аты</b></label>
+<input id="aty" placeholder="Аты">
+<button onclick="kiru()">✅ Кіру</button>
+<p id="msg" style="color:red;text-align:center"></p>
+<h3>🏆 Кім тапсырды?</h3>
+<table><tr><th>Аты</th><th>Балл</th><th>Нәтиже</th></tr><tbody id="board1"></tbody></table>
 </div>
 
-<!-- АЙТЫС БЕТІ -->
-<div id="aytysBet" class="box hidden">
-  <h2>Айтыс беті 🔥</h2>
-  <p>Қош келдің, <b id="atyShygaru"></b>!</p>
-  <p>Сен айтыс бетіндесің!</p>
-  <hr>
-  <p><b>Сұрақ:</b> Айтыс деген не?</p>
-  <button onclick="alert('Дұрыс!')">Жауап беру</button>
-  <br><br>
-  <button onclick="shygu()" style="background:#999">Шығу</button>
+<!-- НЕГІЗГІ -->
+<div id="main" class="box hidden">
+<h2>Сәлем, <span id="showName"></span>!</h2>
+
+<!-- ТАЙМЕР ТӨБЕСІНДЕ -->
+<div id="timerBox" class="timerBox hidden">
+<div>⏰ Әр сұраққа <b>2 минут</b> | Сұрақ: <b><span id="qNum">1</span> / 20</b></div>
+<div class="timerBig" id="timerText">02:00</div>
+<div class="timerBar"><div id="timerFill" class="timerFill"></div></div>
+<div style="font-size:12px;color:#aaa;margin-top:5px">⚠️ Экраннан шығу: <span id="warnCount">0 / 2</span></div>
 </div>
+
+<button id="startBtn" onclick="start()">▶️ Тестті Бастау</button>
+<div id="quiz"></div>
+
+<div id="finishBox" class="hidden">
+<h2 style="text-align:center">✅ Бітті!</h2>
+<p style="text-align:center;font-size:22px">Балл: <b id="finalScore">0</b> / 20</p>
+<p id="finalText" style="text-align:center"></p>
+<button onclick="sendScore()">📤 Нәтижені Жіберу</button>
+<p id="sendMsg" style="color:green;text-align:center"></p>
+</div>
+
+<!-- МЕНІҢ АЙТАТЫНЫМ -->
+<h3>✍️ Менің айтатыным</h3>
+<textarea id="meninJolym" placeholder="Өзіңнің айтыс жолыңды жаз..."></textarea>
+<button onclick="jariyalau()">Жариялау</button>
+<p id="jariyalangan"></p>
+
+<h3>🏆 Рейтинг</h3>
+<table><tr><th>Аты</th><th>Балл</th><th>Нәтиже</th></tr><tbody id="board2"></tbody></table>
+<button class="gray" onclick="shygu()">Шығу</button>
+</div>
+
+<!-- ЕСКЕРТУ -->
+<div id="warnBox" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box">
+<div style="background:#fff;padding:25px;border-radius:15px;text-align:center;max-width:350px;width:100%">
+<div style="font-size:70px">😟</div><h2>Ай, шықпашы!</h2><p>Экраннан шығып кеттің!<br>Тағы 1 рет шықсаң тест бітеді!</p>
+<button onclick="closeWarn()" style="background:red">Түсіндім, қайтамын</button></div></div>
+
+<!-- ШЫҒАРЫЛДЫ -->
+<div id="cryScreen" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a1a2e;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;box-sizing:border-box">
+<div style="font-size:110px">😭</div><h1 style="color:#fff">Тесттен шығарылдың!</h1><p style="color:#fff">Экраннан шығып кеттің!</p><p style="color:#ff6b6b"><b>Балл: 0 / 20</b></p>
+<button onclick="location.reload()" style="background:#2e9e4f;max-width:300px">🔄 Қайта бастау</button></div>
 
 <script>
-  // Бет ашылғанда тексеру - кірген бе?
-  let saktalganAty = localStorage.getItem("aty");
-  if (saktalganAty) {
-    korsetAitys(saktalganAty);
-  }
+let myName="", score=0, qi=0, answered=false, cheatCount=0, testStarted=false;
+let timeLeft=120, timerInterval=null;
+let Q=[
+["What is 'Cat'?",["Cat","Dog","Bird"],"Cat"],
+["What is 'Dog'?",["Fish","Dog","Cat"],"Dog"],
+["What color is the Sun?",["Blue","Yellow","Green"],"Yellow"],
+["2 + 2 = ?",["3","4","5"],"4"],
+["What is 'Apple'?",["Car","Apple","Banana"],"Apple"],
+["What is 'Book'?",["Book","Pen","Table"],"Book"],
+["What is 'Sun'?",["Moon","Star","Sun"],"Sun"],
+["What is 'Water'?",["Water","Milk","Bread"],"Water"],
+["5 + 3 = ?",["7","8","9"],"8"],
+["What is 'House'?",["House","Car","Tree"],"House"],
+["What is 'Red'?",["Blue","Red","Black"],"Red"],
+["10 - 4 = ?",["5","6","7"],"6"],
+["What is 'Mother'?",["Father","Mother","Brother"],"Mother"],
+["What is 'School'?",["Home","School","Shop"],"School"],
+["What is 'Pen'?",["Book","Pen","Bag"],"Pen"],
+["3 x 2 = ?",["5","6","4"],"6"],
+["What is 'Bird'?",["Fish","Bird","Cat"],"Bird"],
+["What is 'Milk'?",["Water","Milk","Tea"],"Milk"],
+["What is 'Teacher'?",["Doctor","Teacher","Driver"],"Teacher"],
+["7 + 5 = ?",["11","12","13"],"12"]
+];
+Q.forEach(q=>{ q[1]=q[1].sort(()=>Math.random()-0.5); });
 
-  function kiru() {
-    let aty = document.getElementById("atyInput").value.trim();
-    if (aty == "") {
-      alert("Фамилия мен атыңды жаз!");
-      return;
-    }
-    localStorage.setItem("aty", aty);
-    korsetAitys(aty);
-  }
+// ЕСТЕ САҚТАУ - ОБНОВИТЬ ЕТСЕ ДЕ ШЫҚПАЙДЫ
+let saved = localStorage.getItem("tolyqAty");
+if(saved){ myName=saved; document.getElementById("login").classList.add("hidden"); document.getElementById("main").classList.remove("hidden"); document.getElementById("showName").innerText=myName; loadLeader(); }
+let eski = localStorage.getItem("meninAytysym");
+if(eski){ document.getElementById("jariyalangan").innerText="🔥 "+eski; }
 
-  function korsetAitys(aty) {
-    document.getElementById("kiruBet").classList.add("hidden");
-    document.getElementById("aytysBet").classList.remove("hidden");
-    document.getElementById("atyShygaru").innerText = aty;
+function kiru(){
+  let a=document.getElementById("aty").value.trim();
+  let f=document.getElementById("fam").value.trim();
+  if(a==""||f==""){ document.getElementById("msg").innerText="❗ Фамилия мен атыңды жаз!"; return; }
+  myName=f+" "+a;
+  localStorage.setItem("tolyqAty", myName);
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("main").classList.remove("hidden");
+  document.getElementById("showName").innerText=myName;
+  loadLeader();
+}
+function shygu(){ localStorage.removeItem("tolyqAty"); location.reload(); }
+function jariyalau(){
+  let t=document.getElementById("meninJolym").value.trim();
+  if(t==""){ alert("Алдымен жаз!"); return; }
+  document.getElementById("jariyalangan").innerText="🔥 "+t;
+  localStorage.setItem("meninAytysym", t);
+}
+function start(){
+  score=0; qi=0; cheatCount=0; testStarted=true;
+  history.pushState(null,"",location.href);
+  document.getElementById("startBtn").classList.add("hidden");
+  document.getElementById("finishBox").classList.add("hidden");
+  document.getElementById("timerBox").classList.remove("hidden");
+  showQ();
+}
+function startTimer(){
+  clearInterval(timerInterval); timeLeft=120; updateTimerUI();
+  timerInterval=setInterval(()=>{
+    timeLeft--; updateTimerUI();
+    if(timeLeft<=0){ clearInterval(timerInterval); qi++; showQ(); }
+  },1000);
+}
+function updateTimerUI(){
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  document.getElementById("timerText").innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
+  let pct=(timeLeft/120)*100;
+  let fill=document.getElementById("timerFill"); fill.style.width=pct+"%";
+  if(timeLeft<=30){ fill.classList.add("red"); document.getElementById("timerText").style.color="red"; }
+  else{ fill.classList.remove("red"); document.getElementById("timerText").style.color="#fff"; }
+}
+function showQ(){
+  if(qi>=Q.length){ finish(); return; }
+  answered=false; document.getElementById("qNum").innerText=qi+1;
+  let h='<div class="q"><h3>'+(qi+1)+'. '+Q[qi][0]+'</h3>';
+  Q[qi][1].forEach(o=>{ h+='<button onclick="answer(this,\''+o+'\')">'+o+'</button>'; });
+  h+='</div>'; document.getElementById("quiz").innerHTML=h; startTimer();
+}
+function answer(btn,val){
+  if(answered) return; answered=true; clearInterval(timerInterval);
+  let correct=Q[qi][2];
+  document.querySelectorAll(".q button").forEach(b=>b.disabled=true);
+  if(val===correct){ score++; btn.style.background="#2e9e4f"; btn.style.color="#fff"; }
+  else{ btn.style.background="#e0e0e0"; }
+  setTimeout(()=>{ qi++; showQ(); },400);
+}
+function finish(){
+  testStarted=false; clearInterval(timerInterval);
+  document.getElementById("quiz").innerHTML="";
+  document.getElementById("timerBox").classList.add("hidden");
+  document.getElementById("finishBox").classList.remove("hidden");
+  document.getElementById("finalScore").innerText=score;
+  let passed=score>=10;
+  document.getElementById("finalText").innerHTML=passed?"✅ ТАПСЫРДЫҢ!":"❌ Тапсыра алмадың, тағы тырыс!";
+}
+function sendScore(){
+  let all=JSON.parse(localStorage.getItem("allScores")||"[]");
+  all=all.filter(r=>r.name!==myName);
+  let passed=score>=10?"✅ Тапсырды":"❌ Тапсыра алмады";
+  all.push({name:myName,score:score,result:passed});
+  localStorage.setItem("allScores",JSON.stringify(all));
+  document.getElementById("sendMsg").innerText="✅ Жіберілді!";
+  loadLeader();
+}
+function loadLeader(){
+  let all=JSON.parse(localStorage.getItem("allScores")||"[]");
+  all.sort((a,b)=>b.score-a.score);
+  let h=""; all.forEach(u=>{ h+="<tr><td>"+u.name+"</td><td>"+u.score+" / 20</td><td>"+u.result+"</td></tr>"; });
+  if(!h) h="<tr><td colspan='3'>Әлі ешкім тапсырған жоқ</td></tr>";
+  document.getElementById("board1").innerHTML=h;
+  let b2=document.getElementById("board2"); if(b2) b2.innerHTML=h;
+}
+function closeWarn(){ document.getElementById("warnBox").classList.add("hidden"); }
+function caughtCheating(){
+  if(!testStarted) return; cheatCount++;
+  document.getElementById("warnCount").innerText=cheatCount+" / 2";
+  if(cheatCount>=2){
+    testStarted=false; clearInterval(timerInterval); score=0;
+    document.getElementById("quiz").innerHTML="";
+    document.getElementById("warnBox").classList.add("hidden");
+    document.getElementById("cryScreen").classList.remove("hidden");
+    return;
   }
-
-  function shygu() {
-    localStorage.removeItem("aty");
-    location.reload();
-  }
+  document.getElementById("warnBox").classList.remove("hidden");
+}
+document.addEventListener("visibilitychange",()=>{ if(document.hidden) caughtCheating(); });
+window.addEventListener("blur",()=>{ caughtCheating(); });
+window.addEventListener("popstate",()=>{ history.pushState(null,"",location.href); caughtCheating(); });
+loadLeader();
 </script>
-
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест</title>
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:15px;color:#222}
+.box{background:#fff;padding:20px;border-radius:10px;max-width:500px;margin:15px auto}
+.top{background:#1a73e8;color:#fff;padding:15px;border-radius:10px;max-width:500px;margin:15px auto;text-align:center}
+input{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:12px;background:#1a73e8;color:#fff;border:0;border-radius:8px;margin-top:10px;font-size:16px}
+button.gray{background:#e0e0e0;color:#222}
+button.green{background:#2e7d32}
+button.red{background:#d32f2f}
+.q button{background:#fff;color:#222;border:1px solid #ccc}
+.hidden{display:none}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+td,th{border:1px solid #ddd;padding:8px;text-align:left}
+.result{background:#e8f5e9;padding:15px;border-radius:10px;text-align:center;margin-top:10px}
+.warn{background:#fff3cd;padding:10px;border-radius:8px;margin-top:10px}
+</style>
+</head>
+<body>
+
+<div id="topBar" class="top hidden">
+<b>👤 <span id="topName">-</span></b><br>
+Ұпай: <b><span id="topScore">0</span> / 20</b>
+</div>
+
+<div id="login" class="box">
+<h2>Тіркелу / Кіру</h2>
+<label>Аты</label>
+<input id="firstName" placeholder="Аты: Ақсұлтан">
+<label>Фамилия</label>
+<input id="lastName" placeholder="Фамилия: Амангелді">
+<label>Құпия сөз</label>
+<input id="pass" type="password" placeholder="Құпия сөз">
+<button onclick="tirkelu()">Тіркелу</button>
+<button class="gray" onclick="kiru()">Кіру</button>
+<p id="msg" style="color:red"></p>
+<p style="font-size:12px;color:#666">Админ: Ақсұлтан Амангелді / admin123</p>
+</div>
+
+<div id="main" class="box hidden">
+<h2>Сәлем, <span id="user"></span>!</h2>
+<div id="warnBox" class="warn hidden"></div>
+<button id="startBtn" class="green" onclick="start()">▶️ Бастау</button>
+<div id="quiz"></div>
+
+<div id="finishBox" class="hidden">
+<div class="result">
+<h2>✅ Тест бітті!</h2>
+<p style="font-size:20px">👤 <b id="finalName"></b></p>
+<p style="font-size:24px">Ұпай: <b id="finalScore">0</b> / 20</p>
+<p id="finalText"></p>
+</div>
+<button class="green" onclick="sendScore()">📤 Ұпайды жіберу</button>
+<p id="sendMsg" style="color:green"></p>
+</div>
+
+<div style="margin-top:20px">
+<h3>📋 Оқушылар мен ұпайлары</h3>
+<table><tr><th>Аты Фамилия</th><th>Ұпай</th></tr><tbody id="allScores"></tbody></table>
+</div>
+
+<div id="adminBox" class="hidden">
+<button class="red" onclick="clearScores()">Барлығын өшіру (тек админ)</button>
+</div>
+
+<button class="gray" onclick="shigu()">Шығу</button>
+</div>
+
+<script>
+let Q=[
+["What is 'Cat'?","Cat","Dog","Bird","Cat"],
+["What color is the Sun?","Yellow","Blue","Green","Yellow"],
+["2 + 2 = ?","4","3","5","4"],
+["What is 'Dog'?","Dog","Cat","Fish","Dog"],
+["What is 'Apple'?","Apple","Banana","Car","Apple"],
+["What is 'Book'?","Book","Pen","Table","Book"],
+["What is 'Sun'?","Sun","Moon","Star","Sun"],
+["What is 'Water'?","Water","Milk

@@ -19,6 +19,8 @@ table{width:100%;border-collapse:collapse;margin-top:10px}
 td,th{border:1px solid #ddd;padding:8px;text-align:left}
 .result{background:#e8f5e9;padding:15px;border-radius:10px;text-align:center;margin-top:10px}
 .warn{background:#fff3cd;padding:10px;border-radius:8px;margin-top:10px}
+.passBox{position:relative}
+.eye{position:absolute;right:10px;top:20px;background:none;border:0;width:40px;color:#555;font-size:18px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -31,11 +33,15 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left}
 <div id="login" class="box">
 <h2>Тіркелу / Кіру</h2>
 <label>Аты</label>
-<input id="firstName" placeholder="Аты: Ақсұлтан">
+<input id="firstName" placeholder="Аты: Ақсұлтан" autocomplete="given-name">
 <label>Фамилия</label>
-<input id="lastName" placeholder="Фамилия: Амангелді">
+<input id="lastName" placeholder="Фамилия: Амангелді" autocomplete="family-name">
 <label>Құпия сөз</label>
-<input id="pass" type="password" placeholder="Құпия сөз">
+<div class="passBox">
+<input id="pass" type="password" placeholder="Құпия сөз" autocomplete="current-password">
+<button type="button" class="eye" onclick="showPass()">👁️</button>
+</div>
+<label style="font-size:14px"><input type="checkbox" id="remember" checked style="width:auto"> Мені есте сақтау - пароль өзі жазылады</label>
 <button onclick="tirkelu()">Тіркелу</button>
 <button class="gray" onclick="kiru()">Кіру</button>
 <p id="msg" style="color:red"></p>
@@ -79,5 +85,4 @@ let Q=[
 ["What is 'Dog'?","Dog","Cat","Fish","Dog"],
 ["What is 'Apple'?","Apple","Banana","Car","Apple"],
 ["What is 'Book'?","Book","Pen","Table","Book"],
-["What is 'Sun'?","Sun","Moon","Star","Sun"],
-["What is 'Water'?","Water","Milk
+["What is

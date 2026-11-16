@@ -10,6 +10,7 @@ body{font-family:Arial;background:#f0f2f5;padding:12px;margin:0}
 input{width:100%;padding:13px;margin:8px 0 12px;border:1px solid #ccc;border-radius:10px;box-sizing:border-box;font-size:16px}
 button{width:100%;padding:14px;background:#2e9e4f;color:#fff;border:0;border-radius:10px;font-size:17px;margin-top:10px;cursor:pointer}
 button.gray{background:#e0e0e0;color:#222}
+button.blue{background:#2196F3;color:#fff}
 .q button{background:#fff;color:#222;border:1px solid #ccc;text-align:left}
 .hidden{display:none!important}
 table{width:100%;border-collapse:collapse;margin-top:10px}
@@ -61,7 +62,7 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 <div class="enteredBox"><h3 style="margin:0">👥 Кіргендер:</h3><div id="enteredList2"></div></div>
 <h3>🏆 Рейтинг</h3>
 <table><tr><th>Имя</th><th>Предмет</th><th>Балл</th><th>Результат</th></tr><tbody id="boardSub"></tbody></table>
-<button class="gray" onclick="logout()">🚪 Шығу (атың сақталады!)</button>
+<button class="blue" onclick="obnovit()">🔄 Обновить</button>
 </div>
 
 <div id="main" class="box hidden">
@@ -84,7 +85,7 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 </div>
 <h3>🏆 Рейтинг</h3>
 <table><tr><th>Имя</th><th>Предмет</th><th>Балл</th><th>Результат</th></tr><tbody id="board2"></tbody></table>
-<button class="gray" onclick="logout()">🚪 Шығу</button>
+<button class="blue" onclick="obnovit()">🔄 Обновить</button>
 </div>
 
 <div id="warnBox" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box">
@@ -116,13 +117,8 @@ bio: [["Жасушаның энергия станциясы?",["Ядро","Ми
 inf: [["Ақпарат деген не?",["Мәліметтер","Компьютер","Тышқан"],"0JzTmdC70ZbQvNC10YLRgtC10YA="],["Ақпарат бірлігі?",["Бит","Байт","Килограмм"],"0JHQuNGC"],["1 Байт = ?",["8 бит","10 бит","100 бит"],"OCDQsdC40YI="],["Процессор деген не?",["Компьютердің миы","Монитор","Пернетақта"],"0JrQvtC80L/RjNGO0YLQtdGA0LTRltKjINC80LjRiw=="],["Интернет деген не?",["Бүкіләлемдік желі","Бағдарлама","Ойын"],"0JHSr9C60ZbQu9OZ0LvQtdC80LTRltC6INC20LXQu9GW"],["Мәтіндік файл?",[".txt",".jpg",".mp3"],"LnR4dA=="],["Алгоритм деген не?",["Әрекеттер реті","Ойын","Сурет"],"05jRgNC10LrQtdGC0YLQtdGAINGA0LXRgtGW"],["Құпия сөз не үшін?",["Қорғау үшін","Ойын үшін","Әдемілік үшін"],"0prQvtGA0pPQsNGDINKv0YjRltC9"],["Файл деген не?",["Дискідегі мәліметтер","Қалта","Монитор"],"0JTQuNGB0LrRltC00LXQs9GWINC805nQu9GW0LzQtdGC0YLQtdGA"],["1 Кбайтта неше бит?",["1024","1000","512"],"MTAyNA=="]],
 geom: [["Үшбұрыштың бұрыштарының қосындысы?",["180°","90°","360°"],"MTgwwrA="],["Пифагор теоремасы?",["a²+b²=c²","a+b=c","a²-b²=c²"],"YcKyK2LCsj1jwrI="],["Тіктөртбұрыш ауданы?",["a*b","a+b","a-b"],"YSpi"],["Үшбұрыштың қабырғасы?",["2","3","4"],"Mw=="],["Диаметр = ?",["2 радиус","1 радиус","3 радиус"],"MiDRgNCw0LTQuNGD0YE="],["Қабырғасы 5 квадраттың периметрі?",["20","25","10"],"MjA="],["Гипотенуза деген не?",["Ең ұзын қабырға","Қысқа қабырға","Бұрыш"],"0JXSoyDSsdC30YvQvSDSm9Cw0LHRi9GA0pPQsA=="],["Дөңгелек ауданы?",["πr²","2πr","πr"],"z4BywrI="],["90° бұрыш?",["Тік","Сүйір","Доғал"],"0KLRltC6"],["Шеңберде неше градус?",["180","270","360"],"MzYw"]]
 };
-
-// 🔒 СТРЕЛКАНЫ БҰҒАТТАУ ҮШІН - 10 РЕТ ҚОСЫП ҚОЯМЫЗ
-function lockBack(){
-  for(let i=0;i<10;i++){ history.pushState(null,"",location.href); }
-}
+function lockBack(){ for(let i=0;i<10;i++){ history.pushState(null,"",location.href); } }
 lockBack();
-
 window.kiru=function(){
   let f=document.getElementById("fam").value.trim();
   let a=document.getElementById("aty").value.trim();
@@ -137,14 +133,7 @@ window.kiru=function(){
   document.querySelectorAll(".showName").forEach(e=>e.innerText=myName);
   loadLeader(); loadEntered();
 }
-window.logout=function(){
-  document.getElementById("subjects").classList.add("hidden");
-  document.getElementById("main").classList.add("hidden");
-  document.getElementById("login").classList.remove("hidden");
-  let p=myName.split(" ");
-  if(p[0]) document.getElementById("fam").value=p[0];
-  if(p[1]) document.getElementById("aty").value=p.slice(1).join(" ");
-}
+window.obnovit=function(){ loadLeader(); loadEntered(); location.reload(); }
 window.loadEntered=function(){
   onValue(ref(db,"entered/"),(snap)=>{
     let data=snap.val()||{};
@@ -178,8 +167,6 @@ window.answer=function(btn,val){ if(answered) return; answered=true; clearInterv
 function finish(){ testStarted=false; clearInterval(timerInterval); document.getElementById("quiz").innerHTML=""; document.getElementById("timerBox").classList.add("hidden"); document.getElementById("finishBox").classList.remove("hidden"); document.getElementById("finalScore").innerText=score; let need=Math.ceil(Q.length/2); let passed=score>=need; document.getElementById("finalText").innerHTML=passed?"<span class='ok'>✅ СДАЛ! "+score+"/10</span>":"<span class='no'>❌ Не сдал! "+score+"/10</span>"; }
 window.sendScore=function(){ let key=(myName+"_"+currentSubject+"_"+Date.now()).replace(/[^a-zA-Z0-9а-яА-Я]/g,"_"); let need=Math.ceil(Q.length/2); let passed=score>=need?"✅ Сдал":"❌ Не сдал"; set(ref(db,"results/"+key),{name:myName, subject:currentSubjectTitle, score:score+"/"+Q.length, scoreNum:score, result:passed, time:Date.now()}); document.getElementById("sendMsg").innerText="✅ Сақталды!"; loadLeader(); }
 window.loadLeader=function(){ onValue(ref(db,"results/"),(snap)=>{ let data=snap.val()||{}; let arr=Object.values(data).sort((a,b)=>(b.scoreNum||0)-(a.scoreNum||0)); let h=""; arr.forEach(u=>{ h+="<tr><td>"+u.name+"</td><td>"+(u.subject||"")+"</td><td>"+u.score+"</td><td>"+u.result+"</td></tr>"; }); if(!h) h="<tr><td colspan='4'>Пока никто не сдал</td></tr>"; ["board1","board2","boardSub"].forEach(id=>{ let el=document.getElementById(id); if(el) el.innerHTML=h; }); }); }
-
-// ✅ ҮЙ + СТРЕЛКА - АНТИЧИТ - FIREFOX АШЫЛМАЙДЫ
 window.closeWarn=function(){ document.getElementById("warnBox").classList.add("hidden"); lockBack(); }
 function caughtCheating(){
   if(!testStarted) return;
@@ -199,7 +186,6 @@ document.addEventListener("visibilitychange",()=>{ if(document.hidden) caughtChe
 window.addEventListener("blur",()=>{ caughtCheating(); });
 window.addEventListener("popstate",()=>{ lockBack(); caughtCheating(); });
 window.addEventListener("beforeunload",(e)=>{ if(testStarted){ e.preventDefault(); e.returnValue=""; } });
-
 try{
   let saved=localStorage.getItem("myName");
   if(saved){

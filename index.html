@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="kk">
 <head>
@@ -20,18 +19,60 @@ table{width:100%;border-collapse:collapse;margin-top:10px}
 td,th{border:1px solid #ddd;padding:8px;text-align:left}
 .result{background:#e8f5e9;padding:15px;border-radius:10px;text-align:center;margin-top:10px}
 .warn{background:#fff3cd;padding:10px;border-radius:8px;margin-top:10px}
+.error{background:#ffebee;color:#d32f2f;padding:10px;border-radius:8px;margin-top:10px;text-align:center}
 </style>
 </head>
 <body>
 <div id="topBar" class="top hidden"><b>👤 <span id="topName">-</span></b><br>Ұпай: <b><span id="topScore">0</span> / 20</b></div>
 <div id="login" class="box">
-<h2>Сайтқа кіру</h2>
+<h2>Сайтқа кіру 🔥</h2>
+<p>Пароль керек емес! Тек атыңды жаз!</p>
 <label>Аты</label><input id="firstName" placeholder="Аты: Ақсұлтан">
 <label>Фамилия</label><input id="lastName" placeholder="Фамилия: Амангелді">
-<label>Құпия сөз</label><input id="pass" type="password" value="1234">
-<button class="green" onclick="kiruTirkelu()">✅ Тіркелу және Кіру</button>
-<button class="gray" onclick="kiru()">Кіру</button>
-<p id="msg" style="color:green"></p>
+<button class="green" onclick="kiru()">✅ Кіру</button>
+<div id="msg"></div>
+<p style="font-size:12px;color:#666">⚠️ Бір атпен тек бір адам! Басқа телефоннан да кіре алмайды!</p>
 </div>
 <div id="main" class="box hidden">
-<h2>Сәлем, <span id="user"></span>
+<h2>Сәлем, <span id="user"></span>!</h2>
+<div id="warnBox" class="warn hidden"></div>
+<button id="startBtn" class="green" onclick="start()">▶️ Бастау</button>
+<div id="quiz"></div>
+<div id="finishBox" class="hidden">
+<div class="result"><h2>✅ Тест бітті!</h2><p style="font-size:20px">👤 <b id="finalName"></b></p><p style="font-size:24px">Ұпай: <b id="finalScore">0</b> / 20</p><p id="finalText"></p></div>
+<button class="green" onclick="sendScore()">📤 Ұпайды жіберу</button>
+<p id="sendMsg" style="color:green"></p>
+</div>
+<div style="margin-top:20px"><h3>📋 Оқушылар мен ұпайлары (барлық телефоннан)</h3><table><tr><th>Аты Фамилия</th><th>Ұпай</th></tr><tbody id="allScores"></tbody></table></div>
+<div id="adminBox" class="hidden"><button class="red" onclick="clearAll()">Барлығын өшіру (тек админ)</button></div>
+<button class="gray" onclick="shigu()">Шығу</button>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+<script>
+// 🔥 СЕНІҢ FIREBASE-ІҢ - ДАЙЫН!
+const firebaseConfig = {
+  apiKey: "AIzaSyAlmAoxV5nz8vAH1eI15r6PNgG0BXkUJX4",
+  authDomain: "quizz-bliim.firebaseapp.com",
+  databaseURL: "https://quizz-bliim-default-rtdb.firebaseio.com",
+  projectId: "quizz-bliim",
+  storageBucket: "quizz-bliim.firebasestorage.app",
+  messagingSenderId: "759878101581",
+  appId: "1:759878101581:web:e966e63c2e183b7b8a8a04",
+  measurementId: "G-HJ1B4CDZBW"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
+<script>
+let Q=[
+["What is 'Cat'?","Cat","Dog","Bird","Cat"],
+["What color is the Sun?","Yellow","Blue","Green","Yellow"],
+["2 + 2 = ?","4","3","5","4"],
+["What is 'Dog'?","Dog","Cat","Fish","Dog"],
+["What is 'Apple'?","Apple","Banana","Car","Apple"],
+["What is 'Book'?","Book","Pen","Table","Book"],
+["What is 'Sun'?","Sun","Moon","Star","Sun"],
+["What is 'Water'?","Water","Milk","Bread","Water"],
+["

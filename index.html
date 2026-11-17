@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -27,10 +28,11 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 .timerBox{background:#1a1a2e;color:#fff;padding:12px;border-radius:12px;text-align:center}
 .timerBig{font-size:28px;font-weight:bold}
 .resultBox{background:#f0f7ff;border:1px solid #2196F3;border-radius:12px;padding:15px;margin:10px 0;text-align:center}
+.topCreator{text-align:center;background:#1a1a2e;color:#fff;padding:10px;border-radius:12px;max-width:520px;margin:10px auto;font-size:15px}
 </style>
 </head>
 <body>
-
+<div class="topCreator">👑 создатель: <b style="color:#00C6FF">ohhotnik</b> 🔥</div>
 <div id="login" class="box">
 <h2 style="text-align:center">📚 9-класс • 2-четверть • Сәл Қиын 🔥</h2>
 <p style="text-align:center;color:#666">Бірінші кіру керек!</p>
@@ -48,7 +50,6 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 <button class="gray" onclick="loadLeader()">🔄 Обновить</button>
 <table><tr><th>Имя</th><th>Предмет</th><th>Балл</th><th>Результат</th></tr><tbody id="board1"><tr><td colspan="4">Жүктелуде...</td></tr></tbody></table>
 </div>
-
 <div id="subjects" class="box hidden">
 <h2>Привет, <span class="showName"></span>! 👋</h2>
 <p style="text-align:center;color:#666">Кітапты бас — тест ашылады!</p>
@@ -65,7 +66,6 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 <table><tr><th>Имя</th><th>Предмет</th><th>Балл</th><th>Результат</th></tr><tbody id="boardSub"><tr><td colspan="4">Жүктелуде...</td></tr></tbody></table>
 <button class="blue" onclick="obnovit()">🔄 Обновить</button>
 </div>
-
 <div id="main" class="box hidden">
 <h2><span id="subjectTitle"></span></h2>
 <img id="bookImg" class="bookTop" src="">
@@ -92,16 +92,13 @@ td,th{border:1px solid #ddd;padding:8px;text-align:left;font-size:13px}
 <table><tr><th>Имя</th><th>Предмет</th><th>Балл</th><th>Результат</th></tr><tbody id="board2"><tr><td colspan="4">Жүктелуде...</td></tr></tbody></table>
 <button class="blue" onclick="obnovit()">🔄 Обновить</button>
 </div>
-
 <div id="warnBox" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box">
 <div style="background:#fff;padding:25px;border-radius:15px;text-align:center;max-width:350px;width:100%">
 <div style="font-size:70px">😟</div><h2>Ай, шықпашы!</h2><p>Экраннан шығып кеттің!<br>Үй батырмасын / Стрелканы баспа!<br><br>Тағы 1 рет шықсаң тест бітеді!</p>
 <button onclick="closeWarn()" style="background:red">Түсіндім, қайтамын</button></div></div>
-
 <div id="cryScreen" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a1a2e;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;box-sizing:border-box">
 <div style="font-size:110px">😭</div><h1 style="color:#fff">Тесттен шығарылдың!</h1><p style="color:#fff">Экраннан шығып кеттің!<br>Үй / Стрелка басуға болмайды!</p><p style="color:#ff6b6b"><b>Балл: 0 / 10</b></p>
 <button onclick="location.reload()" style="background:#2e9e4f;max-width:300px">🔄 Қайта бастау</button></div>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -125,44 +122,44 @@ geom: [["Тікбұрышты үшбұрыш: катеттер 3 және 4, г�
 function lockBack(){ for(let i=0;i<10;i++){ history.pushState(null,"",location.href); } }
 lockBack();
 window.kiru=function(){
-  let f=document.getElementById("fam").value.trim();
-  let a=document.getElementById("aty").value.trim();
-  if(!a || !f){ document.getElementById("msg").innerText="❗ Фамилия мен аты жаз!"; return; }
-  myName=f+" "+a;
-  try{ localStorage.setItem("myName", myName); }catch(e){}
-  let key = myName.replace(/[^a-zA-Z0-9а-яА-Я]/g,"_");
-  set(ref(db,"entered/"+key),{name:myName, time:Date.now()});
-  document.getElementById("msg").innerText="";
-  document.getElementById("login").classList.add("hidden");
-  document.getElementById("subjects").classList.remove("hidden");
-  document.querySelectorAll(".showName").forEach(e=>e.innerText=myName);
-  loadLeader(); loadEntered();
+let f=document.getElementById("fam").value.trim();
+let a=document.getElementById("aty").value.trim();
+if(!a || !f){ document.getElementById("msg").innerText="❗ Фамилия мен аты жаз!"; return; }
+myName=f+" "+a;
+try{ localStorage.setItem("myName", myName); }catch(e){}
+let key = myName.replace(/[^a-zA-Z0-9а-яА-Я]/g,"_");
+set(ref(db,"entered/"+key),{name:myName, time:Date.now()});
+document.getElementById("msg").innerText="";
+document.getElementById("login").classList.add("hidden");
+document.getElementById("subjects").classList.remove("hidden");
+document.querySelectorAll(".showName").forEach(e=>e.innerText=myName);
+loadLeader(); loadEntered();
 }
 window.obnovit=function(){ loadLeader(); loadEntered(); }
 window.loadEntered=function(){
-  onValue(ref(db,"entered/"),(snap)=>{
-    let data=snap.val()||{};
-    let arr=Object.values(data).sort((a,b)=>a.time-b.time);
-    let h=""; arr.forEach(u=>{ h+="<span class='enteredUser'>👤 "+u.name+"</span>"; });
-    if(!h) h="Әлі ешкім кірмеді...";
-    let e1=document.getElementById("enteredList"); if(e1) e1.innerHTML=h;
-    let e2=document.getElementById("enteredList2"); if(e2) e2.innerHTML=h;
-    let c=document.getElementById("enteredCount"); if(c) c.innerText=arr.length;
-  });
+onValue(ref(db,"entered/"),(snap)=>{
+let data=snap.val()||{};
+let arr=Object.values(data).sort((a,b)=>a.time-b.time);
+let h=""; arr.forEach(u=>{ h+="<span class='enteredUser'>👤 "+u.name+"</span>"; });
+if(!h) h="Әлі ешкім кірмеді...";
+let e1=document.getElementById("enteredList"); if(e1) e1.innerHTML=h;
+let e2=document.getElementById("enteredList2"); if(e2) e2.innerHTML=h;
+let c=document.getElementById("enteredCount"); if(c) c.innerText=arr.length;
+});
 }
 window.selectSubject=function(key,title){
-  currentSubject=key; currentSubjectTitle=title; alreadySaved=false;
-  Q=[...SUBJECTS[key]].map(q=>({q:q[0], opts:[...q[1]].sort(()=>Math.random()-0.5), ans:q[2]}));
-  document.getElementById("subjects").classList.add("hidden");
-  document.getElementById("main").classList.remove("hidden");
-  document.getElementById("subjectTitle").innerText=title;
-  document.getElementById("bookImg").src=IMGS[key]||"";
-  document.getElementById("qTotal").innerText=Q.length;
-  document.getElementById("finalTotal").innerText=Q.length;
-  document.getElementById("startBtn").classList.remove("hidden");
-  document.getElementById("finishBox").classList.add("hidden");
-  document.getElementById("quiz").innerHTML="";
-  document.getElementById("sendMsg").innerText="";
+currentSubject=key; currentSubjectTitle=title; alreadySaved=false;
+Q=[...SUBJECTS[key]].map(q=>({q:q[0], opts:[...q[1]].sort(()=>Math.random()-0.5), ans:q[2]}));
+document.getElementById("subjects").classList.add("hidden");
+document.getElementById("main").classList.remove("hidden");
+document.getElementById("subjectTitle").innerText=title;
+document.getElementById("bookImg").src=IMGS[key]||"";
+document.getElementById("qTotal").innerText=Q.length;
+document.getElementById("finalTotal").innerText=Q.length;
+document.getElementById("startBtn").classList.remove("hidden");
+document.getElementById("finishBox").classList.add("hidden");
+document.getElementById("quiz").innerHTML="";
+document.getElementById("sendMsg").innerText="";
 }
 window.backToSubjects=function(){ clearInterval(timerInterval); testStarted=false; document.getElementById("main").classList.add("hidden"); document.getElementById("subjects").classList.remove("hidden"); loadLeader(); }
 window.start=function(){ score=0; wrongCount=0; qi=0; cheatCount=0; testStarted=true; alreadySaved=false; document.getElementById("warnCount").innerText="0 / 2"; document.getElementById("scoreNow").innerText="0"; document.getElementById("wrongNow").innerText="0"; lockBack(); document.getElementById("startBtn").classList.add("hidden"); document.getElementById("finishBox").classList.add("hidden"); document.getElementById("timerBox").classList.remove("hidden"); showQ(); }
@@ -170,52 +167,51 @@ function startTimer(){ clearInterval(timerInterval); timeLeft=120; updateTimerUI
 function updateTimerUI(){ let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById("timerText").innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s); }
 function showQ(){ if(qi>=Q.length){ finish(); return; } answered=false; document.getElementById("qNum").innerText=qi+1; let h='<div class="q"><h3>'+(qi+1)+'. '+Q[qi].q+'</h3>'; Q[qi].opts.forEach((o,idx)=>{ h+='<button data-idx="'+idx+'" onclick="answer(this,'+idx+')">'+o+'</button>'; }); h+='</div>'; document.getElementById("quiz").innerHTML=h; startTimer(); }
 window.answer=function(btn,idx){ if(answered) return; answered=true; clearInterval(timerInterval); let val=Q[qi].opts[idx]; let correct=Q[qi].ans; document.querySelectorAll(".q button").forEach(b=>b.disabled=true); if(val===correct){ score = score + 1; btn.style.background="#2e9e4f"; btn.style.color="#fff"; } else{ wrongCount = wrongCount + 1; btn.style.background="#ffcccc"; } document.getElementById("scoreNow").innerText=score; document.getElementById("wrongNow").innerText=wrongCount; setTimeout(()=>{ qi++; showQ(); },400); }
-// ✅ ТҮЗЕТУ: finish болғанда автоматты түрде сақталады, Отправить басудың керегі жоқ!
 function finish(){ testStarted=false; clearInterval(timerInterval); document.getElementById("quiz").innerHTML=""; document.getElementById("timerBox").classList.add("hidden"); document.getElementById("finishBox").classList.remove("hidden"); document.getElementById("finalScore").innerText=score; document.getElementById("finalCorrect").innerText=score; document.getElementById("finalCorrectPoints").innerText=score; document.getElementById("finalWrong").innerText=wrongCount; let need=Math.ceil(Q.length/2); let passed=score>=need; document.getElementById("finalText").innerHTML=passed?"<span class='ok'>✅ СДАЛ! "+score+"/10</span>":"<span class='no'>❌ Не сдал! "+score+"/10</span>"; autoSave(); }
 function autoSave(){ if(alreadySaved) return; alreadySaved=true; let key=(myName+"_"+currentSubject+"_"+Date.now()).replace(/[^a-zA-Z0-9а-яА-Я]/g,"_"); let need=Math.ceil(Q.length/2); let passed=score>=need?"✅ Сдал":"❌ Не сдал"; set(ref(db,"results/"+key),{name:myName, subject:currentSubjectTitle, score:score+"/"+Q.length, scoreNum:score, result:passed, time:Date.now()}).then(()=>{ document.getElementById("sendMsg").innerText="✅ Автоматты түрде сақталды! Таблицада көрінеді!"; loadLeader(); }).catch(()=>{ document.getElementById("sendMsg").innerText="❌ Сақталмады, интернетті тексер!"; }); }
 window.sendScore=function(){ autoSave(); }
 window.loadLeader=function(){
-  let st=document.getElementById("leaderStatus"); if(st) st.innerText=" (жүктелуде...)";
-  onValue(ref(db,"results/"),(snap)=>{
-    let data=snap.val()||{};
-    let arr=Object.values(data).sort((a,b)=>(b.scoreNum||0)-(a.scoreNum||0));
-    let h="";
-    arr.forEach(u=>{ h+="<tr><td>"+u.name+"</td><td>"+(u.subject||"")+"</td><td>"+u.score+"</td><td>"+u.result+"</td></tr>"; });
-    if(!h) h="<tr><td colspan='4' style='text-align:center;color:#666'>Пока никто не сдал 😔<br><small>Әлі ешкім тестті бітірмеді</small></td></tr>";
-    ["board1","board2","boardSub"].forEach(id=>{ let el=document.getElementById(id); if(el) el.innerHTML=h; });
-    if(st) st.innerText=" ("+arr.length+" адам)";
-  },(err)=>{ ["board1","board2","boardSub"].forEach(id=>{ let el=document.getElementById(id); if(el) el.innerHTML="<tr><td colspan='4'>❌ Firebase-ге қосыла алмады, интернетті тексер</td></tr>"; }); });
+let st=document.getElementById("leaderStatus"); if(st) st.innerText=" (жүктелуде...)";
+onValue(ref(db,"results/"),(snap)=>{
+let data=snap.val()||{};
+let arr=Object.values(data).sort((a,b)=>(b.scoreNum||0)-(a.scoreNum||0));
+let h="";
+arr.forEach(u=>{ h+="<tr><td>"+u.name+"</td><td>"+(u.subject||"")+"</td><td>"+u.score+"</td><td>"+u.result+"</td></tr>"; });
+if(!h) h="<tr><td colspan='4' style='text-align:center;color:#666'>Пока никто не сдал 😔<br><small>Әлі ешкім тестті бітірмеді</small></td></tr>";
+["board1","board2","boardSub"].forEach(id=>{ let el=document.getElementById(id); if(el) el.innerHTML=h; });
+if(st) st.innerText=" ("+arr.length+" адам)";
+},(err)=>{ ["board1","board2","boardSub"].forEach(id=>{ let el=document.getElementById(id); if(el) el.innerHTML="<tr><td colspan='4'>❌ Firebase-ге қосыла алмады, интернетті тексер</td></tr>"; }); });
 }
 window.closeWarn=function(){ document.getElementById("warnBox").classList.add("hidden"); lockBack(); }
 function caughtCheating(){
-  if(!testStarted) return;
-  cheatCount++;
-  document.getElementById("warnCount").innerText=cheatCount+" / 2";
-  if(cheatCount>=2){
-    testStarted=false; clearInterval(timerInterval); score=0; wrongCount=10;
-    document.getElementById("quiz").innerHTML="";
-    document.getElementById("warnBox").classList.add("hidden");
-    document.getElementById("cryScreen").classList.remove("hidden");
-    return;
-  }
-  document.getElementById("warnBox").classList.remove("hidden");
-  lockBack();
+if(!testStarted) return;
+cheatCount++;
+document.getElementById("warnCount").innerText=cheatCount+" / 2";
+if(cheatCount>=2){
+testStarted=false; clearInterval(timerInterval); score=0; wrongCount=10;
+document.getElementById("quiz").innerHTML="";
+document.getElementById("warnBox").classList.add("hidden");
+document.getElementById("cryScreen").classList.remove("hidden");
+return;
+}
+document.getElementById("warnBox").classList.remove("hidden");
+lockBack();
 }
 document.addEventListener("visibilitychange",()=>{ if(document.hidden) caughtCheating(); });
 window.addEventListener("blur",()=>{ caughtCheating(); });
 window.addEventListener("popstate",()=>{ lockBack(); caughtCheating(); });
 window.addEventListener("beforeunload",(e)=>{ if(testStarted){ e.preventDefault(); e.returnValue=""; } });
 try{
-  let saved=localStorage.getItem("myName");
-  if(saved){
-    myName=saved;
-    let p=saved.split(" ");
-    if(p[0]) document.getElementById("fam").value=p[0];
-    if(p[1]) document.getElementById("aty").value=p.slice(1).join(" ");
-    document.getElementById("login").classList.add("hidden");
-    document.getElementById("subjects").classList.remove("hidden");
-    document.querySelectorAll(".showName").forEach(e=>e.innerText=myName);
-  }
+let saved=localStorage.getItem("myName");
+if(saved){
+myName=saved;
+let p=saved.split(" ");
+if(p[0]) document.getElementById("fam").value=p[0];
+if(p[1]) document.getElementById("aty").value=p.slice(1).join(" ");
+document.getElementById("login").classList.add("hidden");
+document.getElementById("subjects").classList.remove("hidden");
+document.querySelectorAll(".showName").forEach(e=>e.innerText=myName);
+}
 }catch(e){}
 loadLeader(); loadEntered();
 </script>
